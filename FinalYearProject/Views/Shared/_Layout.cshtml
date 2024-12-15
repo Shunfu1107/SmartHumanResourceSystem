@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - FinalYearProject</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/css/scrollBars.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/FinalYearProject.styles.css" asp-append-version="true" />
+</head>
+<body>
+	<!-- Side Navbar -->
+	<nav class="side-navbar">
+		<div class="side-navbar-inner">
+			<!-- Sidebar Header -->
+			<div class="sidebar-header d-flex align-items-center justify-content-center p-3">
+				<!-- User Info-->
+				<div class="sidenav-header-inner text-center">
+					<!-- Company Image (Future Enhancement) -->
+					@* <img class="img-fluid rounded-circle avatar mb-3" src="~/images/default_user.png" alt="person">
+					<h2 class="h5 text-black text-uppercase mb-0"></h2> *@
+					<div class="border-bottom my-2 border-gray-400"></div>
+				</div>
+				</a>
+			</div>
+			<!-- Sidebar Navigation Menus-->
+			<partial name="_SideBarNavigationItem" />
+		</div>
+	</nav>
+	<!-- End Side Navbar -->
+	<div class="page">
+		<!-- navbar -->
+		<header class="header mb-5 pb-3">
+			<nav class="nav navbar fixed-top">
+				<div class="container-fluid">
+					<div class="d-flex align-items-center justify-content-between w-100">
+						<div class="d-flex align-items-center">
+							<a class="menu-btn d-flex align-items-center justify-content-center" id="toggle-btn" href="#">
+								<i class="fas fa-bars"></i>
+							</a>
+						</div>
+						<ul class="nav-menu mb-0 list-unstyled d-flex flex-md-row align-items-md-center">
+							<!-- Notifications dropdown (Future Enhancement) -->
+							@* <li class="nav-item dropdown">
+								<a class="nav-link text-black position-relative" id="notifications" rel="nofollow" data-bs-target="#" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<i class="fa-solid fa-bell"></i>
+									<span class="badge bg-warning">12</span>
+								</a>
+								<ul class="dropdown-menu dropdown-menu-end mt-sm-3 shadow-sm" aria-labelledby="notifications">
+									<li>
+										<a class="dropdown-item py-3" href="#!">
+											<div class="d-flex">
+												<div class="icon icon-sm bg-blue">
+													<svg class="svg-icon svg-icon-xs svg-icon-heavy">
+														<use xlink:href="#envelope-1"> </use>
+													</svg>
+												</div>
+												<div class="ms-3"><span class="h6 d-block fw-normal mb-1 text-xs text-gray-600">You have 6 new messages </span><small class="small text-gray-600">4 minutes ago</small></div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a class="dropdown-item py-3" href="#!">
+											<div class="d-flex">
+												<div class="icon icon-sm bg-green">
+													<svg class="svg-icon svg-icon-xs svg-icon-heavy">
+														<use xlink:href="#chats-1"> </use>
+													</svg>
+												</div>
+												<div class="ms-3"><span class="h6 d-block fw-normal mb-1 text-xs text-gray-600">New 2 WhatsApp messages</span><small class="small text-gray-600">4 minutes ago</small></div>
+											</div>
+										</a>
+									</li>
+									<li><a class="dropdown-item all-notifications text-center" asp-action="Index" asp-controller="Notification" asp-area="Staff"><strong class="text-xs text-gray-600">View all notifications</strong></a></li>
+								</ul>
+							</li> *@
+							<!-- End Notifications dropdown -->
+							<!-- Log in / Log out -->
+							<partial name="_LoginPartial" />
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
+		<!-- Body -->
+		<section>
+			<main role="main" class="pb-3 py-3">
+				@RenderBody()
+			</main>
+		</section>
+		<!-- End Body -->
+		<!-- Footer -->
+		<footer class="main-footer w-100 position-absolute bottom-0 start-0 py-2 border-top text-muted">
+			<div class="container-fluid">
+				<div class="row text-center gy-3">
+					<div class="col-sm-6 text-sm-start">
+						<p class="mb-0 text-sm text-gray-600">&copy; 2022 - FinalYearProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

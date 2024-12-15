@@ -1,0 +1,112 @@
+﻿@model FinalYearProject.Models.CompanyKPI
+
+@{
+    ViewData["Title"] = "Delete Company KPI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb -->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <h2 class="flex-shrink-0">Are you sure you want to delete?</h2>
+            </div>
+            <div class="text-end">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="KPI_id"/>
+                    <button type="submit" value="Yes, Delete" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Yes,Delete</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Company KPI content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-danger bg-opacity-10 border-danger border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-danger fs-4 me-3"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0 text-danger">Delete Confirmation</h5>
+                                <p class="mb-0 text-muted small">This action cannot be undone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewData["ErrorMessageDate"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @ViewData["ErrorMessageDate"]
+                            </div>
+                        }
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <!-- Hidden Fields -->
+                            <input type="hidden" asp-for="KPI_id" class="form-control" />
+                            <input type="hidden" asp-for="company_id" class="form-control" />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="target_name" class="form-label">Target Name</label>
+                                        <input asp-for="target_name" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="target_KPI" class="form-label">Target KPI</label>
+                                        <input asp-for="target_KPI" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="hit_KPI_allowance" class="form-label">Target KPI Allowance</label>
+                                        <input asp-for="hit_KPI_allowance" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="start_date" class="form-label">Start Date</label>
+                                        <input asp-for="start_date" class="form-control" disabled />
+                                        <span asp-validation-for="start_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="end_date" class="form-label">End Date</label>
+                                        <input asp-for="end_date" class="form-control" disabled />
+                                        <span asp-validation-for="end_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="status" class="control-label">Status</label>
+                                        <input asp-for="status" class="form-control" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,116 @@
+﻿@model FinalYearProject.Models.ViewModels.RolePermissionVM
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2">
+        <div class="text-end">
+            <partial name="_EditDeleteBackButtonPartial" model="@Model.Role.role_id"></partial>
+        </div>
+    </div>
+</div>
+
+<!-- Role content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Edit Role</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input asp-for="Role.date_created" type="hidden" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="Role.role_name" class="form-label">Role Name</label>
+                                        <input asp-for="Role.role_name" class="form-control" placeholder="@Html.DisplayFor(model => model.Role.role_name)" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="Role.company_id" class="form-label">Company</label>
+                                        <input asp-for="Role.company_id" class="form-control" placeholder="ViewBag.company_id" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="form-label">Permissions</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="employeeView" disabled/> @Html.DisplayNameFor(model => model.employeeView)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="employeeRegister" disabled /> @Html.DisplayNameFor(model => model.employeeRegister)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="employeeManage" disabled /> @Html.DisplayNameFor(model => model.employeeManage)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="roleManage" disabled /> @Html.DisplayNameFor(model => model.roleManage)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="shiftManage" disabled /> @Html.DisplayNameFor(model => model.shiftManage)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="trainingManage" disabled /> @Html.DisplayNameFor(model => model.trainingManage)
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label class="form-check-label">
+                                            <input class="form-check-input" asp-for="payrateManage" disabled /> @Html.DisplayNameFor(model => model.payrateManage)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

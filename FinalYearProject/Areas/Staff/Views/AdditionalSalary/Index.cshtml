@@ -1,0 +1,126 @@
+﻿@model FinalYearProject.Models.ViewModels.AdditionalSalaryVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Claim Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Claim</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Claim ID</th>
+                                        <th>Requested Claim Amount (RM)</th>
+                                        <th>Approved Claim Amount (RM)</th>
+                                        <th>Date Added</th>
+                                        <th>Claim File</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.AdditionalSalaries != null && Model.AdditionalSalaries.Any())
+                                    {
+                                        @foreach (var salary in Model.AdditionalSalaries)
+                                        {
+                                            <tr>
+                                                <td>@salary.ClaimId</td>
+                                                <td>@string.Format("{0:N2}", salary.ClaimAmount)</td>
+                                                <td>@string.Format("{0:N2}", salary.ApprovedAmount)</td>
+                                                <td>@salary.DateAdded.ToString("yyyy-MM-dd")</td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(salary.ClaimFile))
+                                                    {
+                                                        <a href="@Url.Content("~/claims/" + System.IO.Path.GetFileName(salary.ClaimFile))" target="_blank" class="btn btn-link">
+                                                            <i class="fas fa-file-alt"></i> View File
+                                                        </a>
+                                                    }
+
+                                                    else
+                                                    {
+                                                        <span>No file uploaded</span>
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="5" class="text-center">No claims found.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- KPI Reward Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">KPI Reward</h3>
+                            <span>Total Results: @Model.KPIRewards?.Count()</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>KPI ID</th>
+                                        <th>Employee ID</th>
+                                        <th>Hit KPI Reward (RM)</th>
+                                        <th>Date Added</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.KPIRewards != null && Model.KPIRewards.Any())
+                                    {
+                                        foreach (var reward in Model.KPIRewards)
+                                        {
+                                            <tr>
+                                                <td>@reward.KPIId</td>
+                                                <td>@reward.EmployeeId</td>
+                                                <td>@string.Format("{0:N2}", reward.HitKPIReward)</td>
+                                                <td>@reward.DateAdded.ToString("yyyy-MM-dd")</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="4" class="text-center">No rewards found.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

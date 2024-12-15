@@ -1,0 +1,96 @@
+﻿@model FinalYearProject.Models.CompanyKPI
+
+@{
+    ViewData["Title"] = "Edit Company KPI";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Company KPI content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Edit Company KPI</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewData["ErrorMessageDate"] != null)
+                        {
+                            <div class="alert alert-danger">
+                                @ViewData["ErrorMessageDate"]
+                            </div>
+                        }
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                            <!-- Hidden Fields -->
+                            <input type="hidden" asp-for="KPI_id" class="form-control" />
+                            <input type="hidden" asp-for="company_id" class="form-control" />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="target_KPI" class="form-label">Target KPI</label>
+                                        <input asp-for="target_KPI" class="form-control" required />
+                                        <span asp-validation-for="target_KPI" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="hit_KPI_allowance" class="form-label">Hit KPI Allowance</label>
+                                        <input asp-for="hit_KPI_allowance" class="form-control" required />
+                                        <span asp-validation-for="hit_KPI_allowance" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="target_name" class="form-label">Target Name</label>
+                                        <input asp-for="target_name" class="form-control" required />
+                                        <span asp-validation-for="target_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="start_date" class="form-label">Start Date</label>
+                                        <input asp-for="start_date" class="form-control" required />
+                                        <span asp-validation-for="start_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="end_date" class="form-label">End Date</label>
+                                        <input asp-for="end_date" class="form-control" required />
+                                        <span asp-validation-for="end_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="status" class="control-label">Status</label>
+                                        <select asp-for="status" class="form-select mb-3" asp-items="@(new SelectList(ViewBag.statusOptions))"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" id="submit-btn" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save it</button>
+                                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

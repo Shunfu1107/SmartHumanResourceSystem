@@ -1,0 +1,109 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+    Layout = "~/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+}
+
+<div class="login-page d-flex align-items-center bg-gray-100">
+    <div class="container mb-3">
+        <div class="row ">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Header -->
+                        <header class="text-center mb-5">
+                            <h1 class="text-xxl text-gray-400 text-uppercase"><strong class="text-primary">@ViewData["Title"]</strong></h1>
+                            <p class="text-gray-500 fw-light">Use a local account to log in.</p>
+                        </header>
+                        <!-- Body -->
+                        <form id="account" method="post">
+                            <div class="row">
+                                <div class="col-lg-7 mx-auto">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <div class="input-material-group">
+                                        <input asp-for="Input.Username" class="input-material" autocomplete="username" aria-required="true" />
+                                        <label asp-for="Input.Username" class="label-material"></label>
+                                        <span asp-validation-for="Input.Username" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-material-group">
+                                        <input asp-for="Input.Password" class="input-material" autocomplete="current-password" aria-required="true" />
+                                        <label asp-for="Input.Password" class="label-material"></label>
+                                        <span asp-validation-for="Input.Password" class="text-danger"></span>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <label asp-for="Input.RememberMe" class="label-material">
+                                            <input class="form-check-input" asp-for="Input.RememberMe" />
+                                            <label class="label-material" asp-for="Input.RememberMe">@Html.DisplayNameFor(m => m.Input.RememberMe)</label>
+                                        </label>
+                                        <a class="text-xs text-paleBlue" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                                    </div>
+                                    <div class="col-12 text-center">
+                                        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-lg-7 mx-auto">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <hr class="flex-grow-1" />
+                                        <span class="mx-2 text-muted">OR</span>
+                                        <hr class="flex-grow-1" />
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- External Logins Button -->
+                            <div class="row mb-2">
+                                <div class="col-lg-7 mx-auto text-center">
+                                    <span class="label-material px-2">Login with</span>
+                                    @{
+                                        if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                                        {
+                                            <div>
+                                                <p>
+                                                    There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">
+                                                        article
+                                                        about setting up this ASP.NET application to support logging in via external services
+                                                    </a>.
+                                                </p>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                                                @foreach (var provider in Model.ExternalLogins)
+                                                {
+                                                    <button type="submit" class="btn btn-danger" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="fab fa-google"></i></button>
+                                                }
+                                            </form>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            <!-- Go to Resend Email Button -->
+                            <div class="row">
+                                <div class="col-lg-7 mx-auto text-center">
+                                    <a class="text-xs text-paleBlue ms-1" id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation.</a>
+                                </div>
+                            </div>
+                            <!-- Go to Register Button -->
+                            <div class="row">
+                                <div class="col-lg-7 mx-auto text-center">
+                                    <span class="text-xs mb-0 text-gray-500">Do not have an account?  </span>
+                                    <a class="text-xs text-paleBlue ms-1" asp-area="Identity" asp-page="/Account/Register">
+                                        Signup
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

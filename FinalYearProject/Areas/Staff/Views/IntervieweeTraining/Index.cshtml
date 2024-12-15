@@ -1,0 +1,79 @@
+﻿@model IEnumerable<FinalYearProject.Models.Training>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Interviewee Training Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Training Overview</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Training ID</th>
+                                        <th>Training Name</th>
+                                        <th>Start Date</th>
+                                        <th>Duration (Days)</th>
+                                        <th>Training Link</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <!-- Display training details -->
+                                            <td>@Html.DisplayFor(modelItem => item.training_id)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.training_name)</td>
+                                            <td>
+                                                @if (item.start_date.HasValue)
+                                                {
+                                                    @item.start_date.Value.ToString("dd/MM/yyyy")
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">N/A</span>
+                                                }
+                                            </td>
+                                            <td>@item.duration</td>
+                                            <td>
+                                                @if (!string.IsNullOrEmpty(item.training_link))
+                                                {
+                                                    <a href="@item.training_link" target="_blank" class="btn btn-link">View Link</a>
+                                                }
+                                                else
+                                                {
+                                                    <span class="text-muted">N/A</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a asp-action="Details" asp-route-id="@item.training_id" class="btn btn-primary">Submit Result</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775" crossorigin="anonymous">

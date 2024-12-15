@@ -1,0 +1,81 @@
+﻿@model FinalYearProject.Models.Shift
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Shift content -->
+<section class="pb-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Shift</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="shift_start" class="form-label">Shift start</label>
+                                        <input asp-for="shift_start" class="form-control" />
+                                        <span asp-validation-for="shift_start" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="shift_end" class="form-label">Shift End</label>
+                                        <input asp-for="shift_end" class="form-control" />
+                                        <span asp-validation-for="shift_end" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="parent_shift" class="form-label">Parent Shift</label>
+                                        <select asp-for="parent_shift" class="form-select mb-3" asp-items="ViewBag.parent_shift"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="payrate_id" class="form-label">Payrate Id</label>
+                                        <select asp-for="payrate_id" class="form-select mb-3" asp-items="ViewBag.payrate_id"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label name="Repeatable" class="form-label">Repeatable</label>
+                                        <select type="text" name="repeat" class="form-select mb-3" asp-items="ViewBag.repeatable"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 d-flex align-items-end">
+                                    <div class="mb-3">
+                                        <input class="form-check-input" asp-for="is_overtime" />
+                                        <label class="form-label ms-2">OverTime</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <partial name="_CreateBackPartial"></partial>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+

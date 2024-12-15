@@ -1,0 +1,122 @@
+﻿@model FinalYearProject.Models.Training
+
+@{
+    ViewData["Title"] = "Interviewee Training Submit Proof";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+
+<!-- Training Overview content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Training Overview</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="training_id" class="form-label">Training Id</label>
+                                    <input asp-for="training_id" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="start_date" class="form-label">Start Date</label>
+                                    <input asp-for="start_date" class="form-control" placeholder="@Model.start_date?.ToString("dd/MM/yyyy")" readonly />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="duration" class="form-label">Duration (Days)</label>
+                                    <input asp-for="duration" class="form-control" placeholder="@Model.duration days" readonly />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="training_link" class="form-label">Training Link</label>
+                                    @if (!string.IsNullOrEmpty(Model.training_link))
+                                    {
+                                        <a class="btn btn-link d-block text-start" href="@Model.training_link" target="_blank" class="btn btn-link">View Training</a>
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="training_link" class="form-control" placeholder="N/A<" readonly />
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Submit Proof content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Submit Proof</h3>
+                    </div>
+                    <div class="card-body">
+                        @if (ViewBag.Progress != null)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Status</label>
+                                        <input class="form-control" placeholder="@ViewBag.Progress.Status" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Submission</label>
+                                            <a class="btn btn-link d-block text-start" href="@Url.Content(ViewBag.Progress.ResultImagePath)" target="_blank">View Submission</a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        }
+                        <!-- Form to Submit Result -->
+                        <form asp-action="SubmitResult" asp-controller="IntervieweeTraining" asp-area="Staff" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="trainingId" value="@Model.training_id" />
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="submission" class="form-label">Upload Result (Image or Document)</label>
+                                        <input type="file" name="submission" id="submission" class="form-control" required />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload me-2"></i>Submit Result</button>
+                                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775" crossorigin="anonymous">

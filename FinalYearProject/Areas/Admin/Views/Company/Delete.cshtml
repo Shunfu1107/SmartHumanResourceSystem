@@ -1,0 +1,124 @@
+﻿@model FinalYearProject.Models.Company
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <h2 class="flex-shrink-0">Are you sure you want to delete?</h2>
+            </div>
+            <div class="text-end">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="company_id" />
+                    <button type="submit" value="Yes, Delete" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Yes,Delete</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Company content -->
+<section class="pb-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-danger bg-opacity-10 border-danger border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-danger fs-4 me-3"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0 text-danger">Delete Confirmation</h5>
+                                <p class="mb-0 text-muted small">This action cannot be undone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="mb-3">
+                                <label asp-for="company_name" class="form-label">Comapny Name</label>
+                                <input asp-for="company_name" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.company_name)" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="mb-3">
+                                <label asp-for="date_created" class="form-label">Date Created</label>
+                                <input asp-for="date_created" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.date_created)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                <label asp-for="address" class="form-label">Address</label>
+                                <input asp-for="address" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.address)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="longitude" class="form-label">Longitude</label>
+                                    <input asp-for="longitude" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.longitude)" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="latitude" class="form-label">Latitude</label>
+                                    <input asp-for="latitude" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.latitude)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                <label asp-for="paidLeaveYearly" class="form-label">Yearly Paid Leave</label>
+                                <input asp-for="paidLeaveYearly" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.paidLeaveYearly)" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                <label asp-for="paidMaxCarryover" class="form-label">Paid Max Carryover</label>
+                                <input asp-for="paidMaxCarryover" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.paidMaxCarryover)" disabled>
+                                 </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                <label asp-for="sickLeaveYearly" class="form-label">Yearly Sick Leave</label>
+                                <input asp-for="sickLeaveYearly" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.sickLeaveYearly)" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                <label asp-for="sickMaxCarryover" class="form-label">Sick Max Carryover</label>
+                                <input asp-for="sickMaxCarryover" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.sickMaxCarryover)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="current_admin" class="form-label">Company Admin</label>
+                                    <input asp-for="current_admin" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.current_admin)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

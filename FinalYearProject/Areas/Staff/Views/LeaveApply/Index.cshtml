@@ -1,0 +1,133 @@
+﻿@model FinalYearProject.Models.ViewModels.EmployeeLeaveListVM
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<div class="container-fluid py-4">
+    <!-- Leave Balance Cards -->
+    <div class="row g-3 mb-4 py-1">
+        <!-- Paid Leave Card -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar-check text-primary fs-4 me-2"></i>
+                        <h6 class="mb-0">Paid Leave Balance</h6>
+                    </div>
+                    <h3 class="mb-1">@Model.owner.paidLeaveHourLeft hours</h3>
+                    @if (Model.owner.paidLeaveOnBargain > 0)
+                    {
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>@Model.owner.paidLeaveOnBargain hours pending
+                        </small>
+                    }
+                </div>
+            </div>
+        </div>
+        <!-- Sick Leave Card -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-notes-medical text-danger fs-4 me-2"></i>
+                        <h6 class="mb-0">Sick Leave Balance</h6>
+                    </div>
+                    <h3 class="mb-1">@Model.owner.sickLeaveHourLeft hours</h3>
+                    @if (Model.owner.sickLeaveOnBargain > 0)
+                    {
+                        <small class="text-muted">
+                            <i class="fas fa-clock me-1"></i>@Model.owner.sickLeaveOnBargain hours pending
+                        </small>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Apply Leave Table -->
+    <section class="tables py-3">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Leave</h3>
+                            <div>
+                                <a asp-route-id="@Model.owner.employee_id" asp-action="Create" class="btn btn-primary">Create Leave</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.displayLeave.EmployeeDetails)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.displayLeave.date_created)
+                                        </th>
+                                        <th>
+                                            Leave Period
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.displayLeave.leave_reason)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.displayLeave.approval_status)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.displayLeave.response_message)
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.leaveApplied)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.EmployeeDetails.employee_id)
+                                            </td>
+                                            <td>
+                                                @item.date_created.ToString("dd-mm-yyyy")
+                                            </td>
+                                            <td>
+                                                @item.leave_start.ToString("dd-mm-yyyy") - @item.leave_end.ToString("dd-mm-yyyy")
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.leave_reason)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.approval_status) -
+                                                @Html.DisplayFor(modelItem => item.ApprovedByEmployee.employee_id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.response_message)
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.leave_id">Edit</a>
+                                                @if (item.approval_status != null)
+                                                {
+                                                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.leave_id">Delete</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

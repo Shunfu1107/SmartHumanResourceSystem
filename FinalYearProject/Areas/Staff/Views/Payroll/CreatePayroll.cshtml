@@ -1,0 +1,46 @@
+﻿@model FinalYearProject.Models.Payroll
+
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Payroll content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Payroll</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="CreatePayroll">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="staff_id" class="form-label"></label>
+                                        <input asp-for="staff_id" class="form-control" />
+                                        <span asp-validation-for="staff_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <partial name="_CreateBackPartial"></partial>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

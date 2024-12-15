@@ -1,0 +1,56 @@
+﻿@model FinalYearProject.Models.Admin
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Admin</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Create">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="admin_id" class="form-label">Admin Id</label>
+                                    <input asp-for="admin_id" class="form-control" />
+                                    <span asp-validation-for="admin_id" class="text-danger"></span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label asp-for="is_superadmin" class="form-label">Account Type</label>
+                                    <select asp-for="is_superadmin" class="form-select mb-3">
+                                        <option value="false">Admin</option>
+                                        <option value="true">Super Admin</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label asp-for="admin_pass" class="form-label">Password</label>
+                                    <input asp-for="admin_pass" class="form-control" type="password"/>
+                                    <span asp-validation-for="admin_pass" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="text-end">
+                                <button type="submit" class="btn btn-primary"><i class="fas fa-plus me-2"></i>Create</button>
+                                <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

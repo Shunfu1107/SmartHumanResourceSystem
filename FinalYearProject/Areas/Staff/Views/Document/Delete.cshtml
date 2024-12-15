@@ -1,0 +1,99 @@
+﻿@model FinalYearProject.Models.Document
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <h2 class="flex-shrink-0">Are you sure you want to delete?</h2>
+            </div>
+            <div class="text-end">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="document_id" />
+                    <button type="submit" value="Yes, Delete" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Yes,Delete</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Document content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Company</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Delete">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="document_id" />
+                            <input type="hidden" asp-for="owner_id" />
+                            <input type="hidden" asp-for="date_created" />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="owner_id" class="form-label"></label>
+                                        <input asp-for="owner_id" class="form-control" disabled />
+                                        <span asp-validation-for="owner_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-3">
+                                        <label asp-for="document_name" class="form-label"></label>
+                                        <input asp-for="document_name" class="form-control" disabled />
+                                        <span asp-validation-for="document_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="date_created" class="form-label"></label>
+                                        <input asp-for="date_created" class="form-control" disabled />
+                                        <span asp-validation-for="date_created" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="expiry_date" class="form-label"></label>
+                                        <input asp-for="expiry_date" class="form-control" disabled />
+                                        <span asp-validation-for="expiry_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="notify_date" class="form-label"></label>
+                                        <input asp-for="notify_date" class="form-control" disabled />
+                                        <span asp-validation-for="notify_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="document_path" class="form-label"></label>
+                                        <input asp-for="document_path" class="form-control" disabled />
+                                        <span asp-validation-for="document_path" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

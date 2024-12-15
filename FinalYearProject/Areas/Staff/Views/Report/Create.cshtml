@@ -1,0 +1,79 @@
+﻿@model FinalYearProject.Models.Report
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Report</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="Create" enctype="multipart/form-data">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+
+                            <input asp-for="report_id" type="hidden" />
+                            <input asp-for="report_sender" type="hidden" />
+                            <input asp-for="report_status" type="hidden" />
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label asp-for="report_title" class="form-label"></label>
+                                        <input type="text" asp-for="report_title" class="form-control my-3" id="report_title" placeholder="Report Title" />
+
+                                        <label asp-for="report_content" class="form-label"></label>
+                                        <div id="editor"></div>
+                                        <input type="hidden" asp-for="report_content" id="report_content" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 border-left">
+                                    <div class="p-3">
+                                        <h5>Report Details</h5>
+                                        <div class="form-group">
+                                            <div id="email-selector">
+                                                <label asp-for="report_receiver" class="form-label"></label>
+                                                <input id="email-input" placeholder="Type email and hit enter..." class="form-control" />
+                                                <div id="selected-emails"></div>
+                                                <div id="suggestions" class="suggestions"></div>
+                                                <input type="hidden" asp-for="report_receiver" id="report_receiver" />
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group mt-3">
+                                            <label class="form-label">Attachments</label>
+                                            <input type="file" name="attachments" class="form-control" multiple>
+                                            <small class="text-muted">You can select multiple files</small>
+                                        </div>
+
+                                        <div class="mt-4">
+                                            <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
+                                            <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Quill Library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@section Scripts {
+    <script src="~/js/custom/report.js"></script>
+}

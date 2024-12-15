@@ -1,0 +1,132 @@
+﻿@model FinalYearProject.Models.Leave
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <h2 class="flex-shrink-0">Are you sure you want to delete?</h2>
+            </div>
+            <div class="text-end">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="leave_id" />
+                    <button type="submit" value="Yes, Delete" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Yes,Delete</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Leave content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-danger bg-opacity-10 border-danger border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-danger fs-4 me-3"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0 text-danger">Delete Confirmation</h5>
+                                <p class="mb-0 text-muted small">This action cannot be undone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="staff_id" class="form-label">Employee</label>
+                                        <input asp-for="staff_id" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.staff_id)" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="date_created" class="form-label">Apply Date</label>
+                                        <input asp-for="date_created" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.date_created)" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave_start" class="form-label">Leave Start</label>
+                                        <input asp-for="leave_start" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.date_created)" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave_end" class="form-label">Leave End</label>
+                                        <input asp-for="leave_end" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.date_created)" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leaveType" class="form-label">Leave Type</label>
+                                        <input asp-for="leaveType" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.leaveType)" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave_reason" class="form-label">Leave Reason</label>
+                                        <input asp-for="leave_reason" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.date_created)" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="approved_by" class="form-label">Approved By</label>
+                                        <input asp-for="approved_by" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.approved_by)" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="response_message" class="form-label">Respopnse Message</label>
+                                        <input asp-for="response_message" class="form-control" placeholder="@Html.DisplayFor(model => model.response_message)" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="approval_status" class="form-label">Status</label>
+                                        <input asp-for="approval_status" type="text" class="form-control" placeholder="@Html.DisplayFor(model => model.approval_status)" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="doc_filepath" class="form-label">File Proved</label>
+                                        <input asp-for="doc_filepath" class="form-control" placeholder="@Html.DisplayFor(model => model.doc_filepath)" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save it</button>
+                                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

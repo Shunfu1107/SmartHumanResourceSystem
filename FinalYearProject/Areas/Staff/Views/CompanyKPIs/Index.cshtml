@@ -1,0 +1,96 @@
+﻿@model IEnumerable<FinalYearProject.Models.CompanyKPI>
+
+@{
+    ViewData["Title"] = "Company KPI List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Company KPI Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Company KPI</h3>
+                            <div>
+                                <a class="btn btn-primary" asp-action="Create">Create New KPI</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Target Name
+                                        </th>
+                                        <th>
+                                            Company ID
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.First().target_KPI)
+                                        </th>
+                                        <th>
+                                            KPI Allwance
+                                        </th>
+                                        <th>
+                                            Status
+                                        </th>
+                                        <th>
+                                            Start Date
+                                        </th>
+                                        <th>
+                                            End Date
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.target_name)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.company_id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.target_KPI)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.hit_KPI_allowance)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.status)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.start_date)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.end_date)
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.KPI_id">Edit</a>
+                                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.KPI_id">Delete</a>
+                                                <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.KPI_id">Details</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,21 @@
+﻿@{
+    var currentAction = ViewContext.RouteData.Values["action"].ToString();
+    var currentController = ViewContext.RouteData.Values["controller"].ToString();
+}
+
+<!-- Breadcrumb-->
+<div class="container-fluid">
+    <div class="card px-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 py-3">
+                <li class="breadcrumb-item">
+                    <a class="fw-light" asp-area="" asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a class="fw-light" asp-area="" asp-controller="@currentController" asp-action="Index">@currentController</a>
+                </li>
+                <li class="breadcrumb-item active fw-light" aria-current="page">@currentAction</li>
+            </ol>
+        </nav>
+    </div>
+</div>

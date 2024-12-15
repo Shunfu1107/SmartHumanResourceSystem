@@ -1,0 +1,71 @@
+﻿@model FinalYearProject.Models.Training
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Training content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Training</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="training_id" />
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="training_name" class="control-label">Training Name</label>
+                                        <input asp-for="training_name" class="form-control" />
+                                        <span asp-validation-for="training_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="start_date" class="control-label">Start Date</label>
+                                        <input asp-for="start_date" class="form-control" />
+                                        <span asp-validation-for="start_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="duration" class="control-label">Duration</label>
+                                        <input asp-for="duration" class="form-control" />
+                                        <span asp-validation-for="duration" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label asp-for="training_link" class="control-label">Training Link</label>
+                                        <input asp-for="training_link" class="form-control" />
+                                        <span asp-validation-for="training_link" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" id="submit-btn" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save it</button>
+                                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

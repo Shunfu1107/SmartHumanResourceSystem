@@ -1,0 +1,52 @@
+﻿@page
+@model ResendEmailConfirmationModel
+@{
+    ViewData["Title"] = "Resend email confirmation";
+    Layout = "~/Areas/Identity/Pages/Account/Manage/_Layout.cshtml";
+}
+
+<div class="login-page d-flex align-items-center bg-gray-100">
+    <div class="container mb-3">
+        <div class="row ">
+            <div class="col-md-6 mx-auto">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Header -->
+                        <header class="text-center">
+                            <h2 class="text-xxl text-gray-400 text-uppercase"><strong class="text-primary">@ViewData["Title"]</strong></h2>
+                            <p class="text-gray-500 fw-light">Enter your email.</p>
+                        </header>
+                        <!-- Body -->
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-lg-7 mx-auto">
+                                    <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                                    <!-- Input Fields -->
+                                    <div class="input-material-group">
+                                        <input asp-for="Input.Email" class="input-material" aria-required="true" />
+                                        <label asp-for="Input.Email" class="label-material"></label>
+                                        <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                    </div>
+
+                                    <button type="submit" class="w-100 btn btn-lg btn-primary">Resend</button>
+                                </div>
+                            </div>
+                            <!-- Back to Login Button -->
+                            <div class="row">
+                                <div class="col-lg-7 mx-auto text-center">
+                                    <a class="text-xs text-paleBlue ms-1" asp-area="Identity" asp-page="/Account/Login">
+                                        Back
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

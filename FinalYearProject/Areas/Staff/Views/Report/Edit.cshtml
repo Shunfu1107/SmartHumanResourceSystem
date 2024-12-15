@@ -1,0 +1,108 @@
+﻿@model FinalYearProject.Models.ViewModels.ReportFeedbackVM
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Report Form-->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Edit Report</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="Edit" enctype="multipart/form-data">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <input asp-for="@Model.Report.report_id" type="hidden" />
+                            <input asp-for="@Model.Report.report_sender" type="hidden" />
+                            <input asp-for="@Model.Report.report_status" type="hidden" />
+                            <input asp-for="@Model.Report.report_date" type="hidden" />
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group">
+                                        <label asp-for="@Model.Report.report_title" class="form-label"></label>
+                                        <input type="text" asp-for="@Model.Report.report_title" class="form-control" id="report_title" placeholder="Report Title" required />
+                                        <label asp-for="@Model.Report.report_content" class="form-label"></label>
+                                        <div id="editor">@Html.Raw(Model.Report.report_content)</div>
+                                        <input type="hidden" asp-for="@Model.Report.report_content" id="report_content" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 border-left">
+                                    <div class="p-3">
+                                        <h5>Report Details</h5>
+                                        <div class="form-group">
+                                            <div id="email-selector">
+                                                <label asp-for="@Model.Report.report_receiver" class="form-label"></label>
+                                                <input id="email-input" class="form-control" readonly/>
+                                                <div id="selected-emails" class="mt-2">
+                                                    @if (ViewBag.Receivers != null)
+                                                    {
+                                                        foreach (var receiver in ViewBag.Receivers)
+                                                        {
+                                                            <div class="tag" data-email="@receiver">@receiver <span class="remove" aria-label="Close">x</span></div>
+                                                        }
+                                                    }
+                                                </div>
+
+                                                <input type="hidden" asp-for="@Model.Report.report_receiver" id="report_receiver" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-3">
+                                            <label class="form-label">Attachments</label>
+                                            @if (@Model.Attachments != null && @Model.Attachments.Any())
+                                            {
+                                                <table class="table table-bordered">
+                                                    @foreach (var attachment in Model.Attachments)
+                                                    {
+                                                        <tr>
+                                                            <td>
+                                                                <a href="@Url.Action("DownloadAttachment", "Report", new { id = attachment.attachment_id })" target="_blank">
+                                                                    @attachment.file_name
+                                                                </a>
+                                                            </td>
+                                                            <td class="text-center">
+                                                                <a href="@Url.Action("DeleteAttachment", "Report", new { id = attachment.attachment_id })" onclick="return confirmDelete();">
+                                                                    &#10005;
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                            } else
+                                            {
+                                                    <label class="form-label">No Attachments Available</label>
+                                                }
+                                            </ul>
+                                            <input type="file" name="attachments" class="form-control" multiple>
+                                            <small class="text-muted">You can select multiple files</small>
+                                        </div>
+                                        <div class="mt-4">
+                                            <button type="submit" id="submit-btn" class="btn btn-primary" asp-route-id="@Model"><i class="fas fa-save me-2"></i>Save it</button>
+                                            <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Quill Library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+@section Scripts {
+    <script src="~/js/custom/report.js"></script>
+}

@@ -1,0 +1,88 @@
+﻿@model FinalYearProject.Models.Shift
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <h2 class="flex-shrink-0">Are you sure you want to delete?</h2>
+            </div>
+            <div class="text-end">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="shift_id" />
+                    <button type="submit" value="Yes, Delete" class="btn btn-danger"><i class="fas fa-trash-alt me-2"></i>Yes,Delete</button>
+                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Shift content -->
+<section class="pb-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-danger bg-opacity-10 border-danger border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-danger fs-4 me-3"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0 text-danger">Delete Confirmation</h5>
+                                <p class="mb-0 text-muted small">This action cannot be undone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="shift_id" class="form-label">Shift Id</label>
+                                    <input asp-for="shift_id" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.shift_id)" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="parent_shift" class="form-label">Parent Shift</label>
+                                    <input asp-for="parent_shift" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.parent_shift)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="shift_start" class="form-label">Shift Start</label>
+                                    <input asp-for="shift_start" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.shift_start)" disabled>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="shift_end" class="form-label">Shift End</label>
+                                    <input asp-for="shift_end" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.shift_end)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="payrate_id" class="form-label">Payrate Id</label>
+                                    <input asp-for="payrate_id" class="form-control" type="text" placeholder="@Html.DisplayFor(model => model.payrate_id)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

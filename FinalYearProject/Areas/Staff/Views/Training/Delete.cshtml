@@ -1,0 +1,90 @@
+﻿@model FinalYearProject.Models.Training
+
+@{
+    ViewData["Title"] = "Delete Training";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2 ">
+        <div class="d-flex justify-content-between">
+            <div class="d-flex">
+                <h2 class="flex-shrink-0">Are you sure you want to delete?</h2>
+            </div>
+            <div class="text-end">
+                <form asp-action="Delete" method="post">
+                    <input type="hidden" asp-for="@Model.training_id" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                    <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Training content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header bg-danger bg-opacity-10 border-danger border-opacity-25">
+                        <div class="d-flex align-items-center">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-exclamation-triangle text-danger fs-4 me-3"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="mb-0 text-danger">Delete Confirmation</h5>
+                                <p class="mb-0 text-muted small">This action cannot be undone.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">Training ID</label>
+                                        <input class="form-control" value="@Model.training_id" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">Training Name</label>
+                                        <input class="form-control" value="@Model.training_name" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label">Start Date</label>
+                                        <input class="form-control" value="@Model.start_date?.ToString("yyyy-MM-dd")" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="control-label">Duration (Days)</label>
+                                        <input class="form-control" value="@Model.duration" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="mb-3">
+                                        <label class="control-label">Training Link</label>
+                                        <input class="form-control" value="@Model.training_link" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

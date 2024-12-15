@@ -1,0 +1,211 @@
+﻿@model FinalYearProject.Models.ViewModels.EmployeeEditVM
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Employee content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Edit Employee</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="Edit">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <input type="hidden" asp-for="user" />
+                            <input type="hidden" asp-for="employee.is_active" />
+                            <input type="hidden" asp-for="employee.acc_pass" />
+                            <input type="hidden" asp-for="employee.paidLeaveOnBargain" />
+                            <input type="hidden" asp-for="employee.sickLeaveOnBargain" />
+                            <input type="hidden" asp-for="employee.paidLeaveHourLeft" />
+                            <input type="hidden" asp-for="employee.sickLeaveHourLeft" />
+                            <input type="hidden" asp-for="employee.uuid" />
+                            <input type="hidden" asp-for="employee.leaveUpdate" />
+                            <input type="hidden" asp-for="employee.profileImg_path" />
+                            <input type="hidden" asp-for="employee.wages_rate" />
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center p-3 mb-5 bg-white rounded">
+                                        <div class="mb-3">
+                                            <img src="@Model.employee.profileImg_path" class="img-fluid rounded-circle mb-3" style="width:150px; height:150px; object-fit:cover;" alt="Profile Image" />
+                                        </div>
+                                        <div class="mb-3">
+                                            <label asp-for="employee.profileImg_path" class="form-label">Change Profile Image</label>
+                                            <input type="file" name="profPic" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.employee_id" class="col-form-label"></label>
+                                        <input asp-for="employee.employee_id" class="form-control" readonly />
+                                        <span asp-validation-for="employee.employee_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.user_id" class="form-label">User Id</label>
+                                        <input asp-for="employee.user_id" class="form-control" />
+                                        <span asp-validation-for="employee.user_id" class="text-danger"></span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.dob" class="form-label">Date Of Birth</label>
+                                        <input asp-for="employee.dob" class="form-control" type="date" />
+                                        <span asp-validation-for="employee.dob" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.email" class="form-label">Email</label>
+                                        <input asp-for="employee.email" class="form-control" />
+                                        <span asp-validation-for="employee.email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.gender" class="form-label">Gender</label>
+                                        <select asp-for="employee.gender" class="form-select mb-3" asp-items="ViewBag.gender"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.nationality" class="form-label">Nationality</label>
+                                        <select asp-for="employee.nationality" class="form-select mb-3" asp-items="ViewBag.nationality"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.phone_no" class="form-label">Phone No</label>
+                                        <input asp-for="employee.phone_no" class="form-control" />
+                                        <span asp-validation-for="employee.phone_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.religion" class="form-label">Religion</label>
+                                        <select id="ddlReligion" asp-for="employee.religion" class="form-select mb-3" asp-items="ViewBag.religion"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.parent_company" class="form-label"></label>
+                                        <input asp-for="employee.parent_company" class="form-control" readonly />
+                                        <span asp-validation-for="employee.parent_company" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.employee_id_by_company" class="form-label"></label>
+                                        <input asp-for="employee.employee_id_by_company" class="form-control" readonly />
+                                        <span asp-validation-for="employee.employee_id_by_company" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.employee_name" class="form-label">Employee Name</label>
+                                        <input asp-for="employee.employee_name" class="form-control" />
+                                        <span asp-validation-for="employee.employee_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.staff_role" class="form-label">Role</label>
+                                        <select asp-for="employee.staff_role" class="form-select mb-3" asp-items="ViewBag.staff_role"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.employment_start_date" class="form-label">Employment Start Date</label>
+                                        <input asp-for="employee.employment_start_date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" />
+                                        <span asp-validation-for="employee.employment_start_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.employer_id" class="form-label">Employeer</label>
+                                        <select id="ddlEmployer" asp-for="employee.employer_id" class="form-select mb-3" asp-items="ViewBag.employer_id"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.bank_name" class="form-label">Bank Name</label>
+                                        <input asp-for="employee.bank_name" class="form-control" />
+                                        <span asp-validation-for="employee.bank_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.bank_no" class="form-label">Bank No</label>
+                                        <input asp-for="employee.bank_no" class="form-control" />
+                                        <span asp-validation-for="employee.bank_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.epf_no" class="form-label">EPF No</label>
+                                        <input asp-for="employee.epf_no" class="form-control" />
+                                        <span asp-validation-for="employee.epf_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.itax_no" class="form-label">Income Tax No</label>
+                                        <input asp-for="employee.itax_no" class="form-control" />
+                                        <span asp-validation-for="employee.itax_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee.sosco_no" class="form-label">Sosco No</label>
+                                        <input asp-for="employee.sosco_no" class="form-control" />
+                                        <span asp-validation-for="employee.sosco_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary" asp-route-id="@Model"><i class="fas fa-save me-2"></i>Save it</button>
+                                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

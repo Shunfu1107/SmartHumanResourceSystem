@@ -1,0 +1,102 @@
+﻿@model FinalYearProject.Models.ViewModels.EmployeeClaimListVM
+
+@{
+    ViewData["Title"] = "Claim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Claim Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Claim</h3>
+                            <div>
+                                <a asp-action="Apply" asp-controller="ApplyClaim" asp-route-id="@Model.owner.employee_id" class="btn btn-primary">
+                                    Apply Claim
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>@Html.DisplayNameFor(model => model.displayClaim.claim_id)</th>
+                                        <th>@Html.DisplayNameFor(model => model.displayClaim.approval_status)</th>
+                                        <th>Reject Reason</th>
+                                        <th>@Html.DisplayNameFor(model => model.displayClaim.date_apply)</th>
+                                        <th>@Html.DisplayNameFor(model => model.displayClaim.claimAmount)</th>
+                                        <th>@Html.DisplayNameFor(model => model.displayClaim.claimFile)</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.claimApplied != null && Model.claimApplied.Any())
+                                    {
+                                        @foreach (var item in Model.claimApplied)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.claim_id)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.approval_status)</td>
+                                                <td>@Html.DisplayFor(modelItem => item.reject_reason)</td>
+                                                <td>@item.date_apply.ToString("yyyy-MM-dd")</td>
+                                                <td>@string.Format("{0:N2}", item.claimAmount)</td>
+                                                <td>
+                                                    @if (!string.IsNullOrEmpty(item.claimFile))
+                                                    {
+                                                        <a href="@Url.Content(item.claimFile)" target="_blank" class="btn btn-link">
+                                                            <i class="fas fa-file-alt"></i> View File
+                                                        </a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span>No file uploaded</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <div>
+                                                        @if (item.approval_status != "Approved")
+                                                        {
+                                                            <a asp-action="Edit" asp-route-id="@item.claim_id" class="btn btn-primary">
+                                                                Edit
+                                                            </a>
+                                                            <a asp-action="Delete" asp-route-id="@item.claim_id" class="btn btn-danger">
+                                                                Delete
+                                                            </a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a>No Action Taken</a>
+                                                        }
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <tr>
+                                            <td colspan="7" class="text-center">No claims found.</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Bootstrap Stylesheet and Icons -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha384-bs4RQb" crossorigin="anonymous">

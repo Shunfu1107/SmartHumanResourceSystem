@@ -1,0 +1,68 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    ViewData["ActivePage"] = ManageNavPages.Index;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Profile Header -->
+<section class="py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="h4 mb-0">Manage your account</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Profile Body -->
+<div>
+    <div class="row">
+        <div class="col-md-3">
+            <partial name="_ManageNav" />
+        </div>
+        <div class="col-md-9">
+            <section class="pb-5">
+                <div class="row">
+                    <!-- Profile Form-->
+                    <div class="col-lg-8">
+                        <div class="card">
+                            <div class="card-header border-bottom">
+                                <h3>@ViewData["Title"]</h3>
+                            </div>
+                            <div class="card-body">
+                                <partial name="_StatusMessage" for="StatusMessage" />
+                                <form id="profile-form" method="post">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Username" class="form-control" placeholder="Please choose your username." disabled />
+                                        <label asp-for="Username" class="form-label"></label>
+                                    </div>
+                                    <div class="form-floating mb-3">
+                                        <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
+                                        <label asp-for="Input.PhoneNumber" class="form-label"></label>
+                                        <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
+                                    </div>
+                                    <div class="border-bottom my-3 border-gray-200"></div>
+                                    <div class="text-end">
+                                        <button id="update-profile-button" type="submit" class="btn btn-lg btn-primary"><i class="fas fa-save me-2"></i>Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

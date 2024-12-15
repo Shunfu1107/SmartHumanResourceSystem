@@ -1,0 +1,298 @@
+﻿<!-- Sidebar Navigation Menus-->
+<ul class="list-unstyled">
+	<!-- For Employee, Admin and Super Admin Navigation -->
+	@if (User.IsInRole("EmployeeView") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+	{
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Home" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/home_icon.svg">
+				Dashboard
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Employee" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/employee_icon.svg">
+				Staff
+			</a>
+		</li>
+	}
+
+	<!-- For Email Rregister/Login, Admin and Super Admin Navigation -->
+	@if (!User.IsInRole("EmployeeView"))
+	{
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Admin" asp-area="Admin">
+				<img class="sidebar-icon" src="~/images/assets/admin_icon.svg">
+				<span>
+					Admin
+				</span>
+			</a>
+		</li>
+	}
+
+	<!-- For Admin and Super Admin only Navigation -->
+	@if (User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+	{
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Company" asp-area="Admin">
+				<img class="sidebar-icon" src="~/images/assets/company_icon.svg">
+				<span>
+					Company
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Role" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/role_icon.svg">
+				<span>
+					Role
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Payroll" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/payroll_icon.svg">
+				<span>
+					Payroll
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="ViewPayrate" asp-controller="Payroll" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/payrate_icon.svg">
+				<span>
+					Payrate
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="ApproveClaim" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/approveClaim_iconsvg.svg" />
+				<span>
+					Approve Claim
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="LeaveApprove" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/approveLeave_icon.svg">
+				<span>
+					Leave List
+				</span>
+			</a>
+		</li>
+		<!-- KPI Dropdown Navigation Item -->
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="#kpidropdownDropdown" data-bs-toggle="collapse">
+				<img class="sidebar-icon" src="~/images/assets/kpi_dropdown_icon.svg">
+				KPI
+			</a>
+			<ul class="collapse list-unstyled" id="kpidropdownDropdown">
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="CompanyKPIs" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/kpi_icon.svg">
+						<span>
+							Company KPIs
+						</span>
+					</a>
+				</li>
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="AdminKPIProgress" asp-area="Admin">
+						<img class="sidebar-icon" src="~/images/assets/kpiProgress_icon.svg" />
+						<span>
+							Admin KPI Progress
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+
+		<!-- Interview Dropdown Navigation Item -->
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="#interviewdropdownDropdown" data-bs-toggle="collapse">
+				<img class="sidebar-icon" src="~/images/assets/interview_dropdown_icon.svg">
+				Interview
+			</a>
+			<ul class="collapse list-unstyled" id="interviewdropdownDropdown">
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="AdminTraining" asp-area="Admin">
+						<img class="sidebar-icon" src="~/images/assets/manageTraining_icon.svg" />
+						<span>
+							Manage Interviewee
+						</span>
+					</a>
+				</li>
+				<li>
+					<a class="sidebar-link" asp-action="CompletedTrainings" asp-controller="AdminTraining" asp-area="Admin">
+						<img class="sidebar-icon" src="~/images/assets/promotion_icon.svg">
+						<span>
+							Promote Interviewees
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Training" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/training_icon.svg">
+				<span>
+					Training
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Notification" asp-area="Admin">
+				<img class="sidebar-icon" src="~/images/assets/notification_icon.svg">
+				<span>
+					Admin Notification
+				</span>
+			</a>
+		</li>
+	}
+	
+	<!-- For Employee Navigation -->
+	@if (User.IsInRole("EmployeeView"))
+	{
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Rating" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/rating_icon.svg">
+				<span>
+					Rating
+				</span>
+			</a>
+		</li>
+		<!-- Training Dropdown Navigation Item -->
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="#trainingdropdownDropdown" data-bs-toggle="collapse">
+				<img class="sidebar-icon" src="~/images/assets/training_dropdown_icon.svg">
+				Training
+			</a>
+			<ul class="collapse list-unstyled" id="trainingdropdownDropdown">
+				<li>
+					<a class="sidebar-link" asp-action="ViewTraining" asp-controller="Training" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/training_icon.svg">
+						<span>
+							View Training
+						</span>
+					</a>
+				</li>
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="IntervieweeTraining" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/intervieweeTraining_icon.svg" />
+						<span>
+							Interviewee Training
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<!-- Leave Dropdown Navigation Item-->
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="#leavedropdownDropdown" data-bs-toggle="collapse">
+				<img class="sidebar-icon" src="~/images/assets/leave_dropdown_icon.svg">
+				Leave
+			</a>
+			<ul class="collapse list-unstyled" id="leavedropdownDropdown">
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="LeaveApply" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/leave_icon.svg">
+						<span>
+							Apply Leave
+						</span>
+					</a>
+				</li>
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="LeaveApprove" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/approveLeave_icon.svg">
+						<span>
+							Approve Leave
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<!-- Shift Dropdown Navigation Item-->
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="#shiftdropdownDropdown" data-bs-toggle="collapse">
+				<img class="sidebar-icon" src="~/images/assets/shift_dropdown_icon.svg">
+				Shift
+			</a>
+			<ul class="collapse list-unstyled" id="shiftdropdownDropdown">
+				<li>
+					<a class="sidebar-link" asp-action="Index" asp-controller="Shift" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/shift_icon.svg">
+						<span>
+							Shift
+						</span>
+					</a>
+				</li>
+				<li>
+					<a class="sidebar-link" asp-action="CreateQRCode" asp-controller="Shift" asp-area="Staff">
+						<img class="sidebar-icon" src="~/images/assets/qrCode_icon.svg">
+						<span>
+							QR CODE
+						</span>
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="ViewPayrate" asp-controller="Payroll" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/payrate_icon.svg">
+				<span>
+					Payrate
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="ViewPayroll" asp-controller="Payroll" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/payroll_icon.svg">
+				<span>
+					View Own Payroll
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="ApplyClaim" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/claim_icon.svg">
+				<span>
+					Apply Claim
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="EmployeeKPIProgress" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/submitProof_icon.svg" />
+				<span>
+					Submit KPI Proof
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="AdditionalSalary" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/additionalSalary_icon.svg" />
+				<span>
+					Additional Salary
+				</span>
+			</a>
+		</li>
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Notification" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/notification_icon.svg">
+				<span>
+					Notification
+				</span>
+			</a>
+		</li>
+		<li class="sidebar-item">
+			<a class="sidebar-link" asp-action="Index" asp-controller="Report" asp-area="Staff">
+				<img class="sidebar-icon" src="~/images/assets/report_icon.svg">
+				<span>
+					Report
+				</span>
+			</a>
+		</li>
+	}
+</ul>

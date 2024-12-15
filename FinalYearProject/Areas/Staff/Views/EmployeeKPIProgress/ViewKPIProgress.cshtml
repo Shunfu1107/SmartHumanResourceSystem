@@ -1,0 +1,56 @@
+﻿@model List<FinalYearProject.Models.EmployeeKPI>
+
+@{
+    ViewData["Title"] = "KPI Progress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- View KPI Progress Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">KPI Progress</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>KPI Target</th>
+                                        <th>Current Progress (RM)</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var kpi in Model)
+                                    {
+                                        <tr>
+                                            <td>@kpi.CompanyKPI.target_KPI</td>
+                                            <td>@kpi.CurrentProgress</td>
+                                            <td>
+                                                <span class="badge @(kpi.CurrentProgress >= kpi.CompanyKPI.target_KPI ? "badge-success" : "badge-warning")">
+                                                    @(kpi.CurrentProgress >= kpi.CompanyKPI.target_KPI ? "Completed" : "In Progress")
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Include Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ775" crossorigin="anonymous">

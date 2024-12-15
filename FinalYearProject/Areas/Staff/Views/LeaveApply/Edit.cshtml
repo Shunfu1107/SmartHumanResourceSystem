@@ -1,0 +1,95 @@
+﻿@model FinalYearProject.Models.ViewModels.EmployeeEditLeaveVM
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Leave content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Edit Leave</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="leave.leave_id" />
+                            <input type="hidden" asp-for="leave.staff_id" />
+                            <input type="hidden" asp-for="leave.date_created" />
+                            <input type="hidden" asp-for="previousType" />
+                            <input type="hidden" asp-for="previousDuration" />
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave.leave_start" class="form-label">Leave Start</label>
+                                        <input asp-for="leave.leave_start" class="form-control" />
+                                        <span asp-validation-for="leave.leave_start" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave.leave_end" class="form-label">Leave End</label>
+                                        <input asp-for="leave.leave_end" class="form-control" />
+                                        <span asp-validation-for="leave.leave_end" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave.leaveType" class="form-label">Leave Type</label>
+                                        <select asp-for="leave.leaveType" class="form-select mb-3" asp-items="ViewBag.leaveType"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave.leave_reason" class="form-label">Leave Reason</label>
+                                        <input asp-for="leave.leave_reason" class="form-control" />
+                                        <span asp-validation-for="leave.leave_reason" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="leave.date_created" class="form-label">Apply Date</label>
+                                        <input asp-for="leave.date_created" class="form-control" readonly />
+                                        <span asp-validation-for="leave.date_created" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Current File:</label>
+                                        <input asp-for="leave.doc_filepath" class="form-control" readonly />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label class="form-label">Upload New:</label>
+                                        <input type="file" name="leaveFile" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save it</button>
+                                    <a class="btn btn-outline-secondary" asp-action="Index"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

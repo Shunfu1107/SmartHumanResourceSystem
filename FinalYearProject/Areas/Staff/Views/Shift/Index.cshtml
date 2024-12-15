@@ -1,0 +1,100 @@
+﻿@model IEnumerable<FinalYearProject.Models.Shift>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Admin Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Shift</h3>
+                            <div>
+                                <a class="btn btn-primary" asp-action="Create">Create Shift</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            Shift Id
+                                        </th>
+                                        <th>
+                                            Shift Start
+                                        </th>
+                                        <th>
+                                            Shift End
+                                        </th>
+                                        <th>
+                                            Overtime
+                                        </th>
+                                        <th>
+                                            Parent Shift
+                                        </th>
+                                        <th>
+                                            Payrate
+                                        </th>
+                                        <th>
+                                            Actions
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.shift_id)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.shift_start)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.shift_end)
+                                            </td>
+                                            @if (item.is_overtime)
+                                            {
+                                                <td>
+                                                    Overtime
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    Not Overtime
+                                                </td>
+                                            }
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.parent_shift)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.Payrate)
+                                            </td>
+
+                                            <td>
+                                                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.shift_id">Edit</a>
+                                                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.shift_id">Delete</a>
+                                                <a class="btn btn-secondary" asp-action="Details" asp-route-id="@item.shift_id">Details</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

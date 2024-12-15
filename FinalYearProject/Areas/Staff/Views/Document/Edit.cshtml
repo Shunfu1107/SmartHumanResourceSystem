@@ -1,0 +1,88 @@
+﻿@model FinalYearProject.Models.Document
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Document content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Company</h3>
+                    </div>
+                    <div class="card-body">
+                        <form asp-action="Edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="document_id" />
+                            <input type="hidden" asp-for="owner_id" />
+                            <input type="hidden" asp-for="date_created" />
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label asp-for="owner_id" class="form-label"></label>
+                                        <input asp-for="owner_id" class="form-control" disabled/>
+                                        <span asp-validation-for="owner_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="mb-3">
+                                        <label asp-for="document_name" class="form-label"></label>
+                                        <input asp-for="document_name" class="form-control" />
+                                        <span asp-validation-for="document_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="date_created" class="form-label"></label>
+                                        <input asp-for="date_created" class="form-control" disabled/>
+                                        <span asp-validation-for="date_created" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="expiry_date" class="form-label"></label>
+                                        <input asp-for="expiry_date" class="form-control" />
+                                        <span asp-validation-for="expiry_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="notify_date" class="form-label"></label>
+                                        <input asp-for="notify_date" class="form-control" />
+                                        <span asp-validation-for="notify_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="document_path" class="form-label"></label>
+                                        <input asp-for="document_path" class="form-control" />
+                                        <span asp-validation-for="document_path" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Save it</button>
+                                    <a asp-action="Index" class="btn btn-outline-secondary"><i class="fas fa-arrow-left me-2"></i>Back to List</a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

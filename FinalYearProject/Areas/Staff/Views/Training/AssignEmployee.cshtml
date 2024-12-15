@@ -1,0 +1,49 @@
+﻿@model TrainingProgress
+
+@{
+    ViewData["Title"] = "AssignEmployee";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- View Training Progress content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Assign Training</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="AssignEmployee">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="staff_id" class="control-label"></label>
+                                        <select asp-for="staff_id" class="form-select mb-3" asp-items="ViewBag.staffID"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="training_id" class="control-label"></label>
+                                        <select asp-for="training_id" class="form-select mb-3" asp-items="ViewBag.trainingID"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <partial name="_CreateBackPartial"></partial>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

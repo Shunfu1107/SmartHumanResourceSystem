@@ -1,0 +1,51 @@
+﻿@model FinalYearProject.Models.Payrate
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Payrate content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Create Payrate</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="CreatePayrate">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="payrate_name" class="form-label">Payrate Name</label>
+                                        <input asp-for="payrate_name" class="form-control" />
+                                        <span asp-validation-for="payrate_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="payrate_ratePerHour" class="form-label">Payrate per Hour</label>
+                                        <input asp-for="payrate_ratePerHour" class="form-control" />
+                                        <span asp-validation-for="payrate_ratePerHour" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <partial name="_CreateBackPartial"></partial>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

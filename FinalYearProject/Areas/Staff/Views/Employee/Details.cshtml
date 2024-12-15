@@ -1,0 +1,181 @@
+﻿@model FinalYearProject.Models.EmployeeDetails
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2">
+        <div class="text-end">
+            <partial name="_EditDeleteBackButtonPartial" model="@Model.employee_id"></partial>
+        </div>
+    </div>
+</div>
+
+<!-- Employee content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Employee Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="Edit">
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center p-3 mb-5 bg-white rounded">
+                                        <div class="mb-3">
+                                            <img src="@Model.profileImg_path" class="img-fluid rounded-circle mb-3" style="width:150px; height:150px; object-fit:cover;" alt="Profile Image" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee_id" class="col-form-label"></label>
+                                        <input asp-for="employee_id" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="user_id" class="form-label">User Id</label>
+                                        <input asp-for="user_id" class="form-control" disabled />
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="dob" class="form-label">Date Of Birth</label>
+                                        <input asp-for="dob" class="form-control" type="date" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="email" class="form-label">Email</label>
+                                        <input asp-for="email" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="gender" class="form-label">Gender</label>
+                                        <input asp-for="gender" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="nationality" class="form-label">Nationality</label>
+                                        <input asp-for="nationality" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="phone_no" class="form-label">Phone No</label>
+                                        <input asp-for="phone_no" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="religion" class="form-label">Religion</label>
+                                        <input asp-for="religion" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="parent_company" class="form-label"></label>
+                                        <input asp-for="parent_company" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee_id_by_company" class="form-label"></label>
+                                        <input asp-for="employee_id_by_company" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee_name" class="form-label">Employee Name</label>
+                                        <input asp-for="employee_name" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="staff_role" class="form-label">Role</label>
+                                        <input asp-for="staff_role" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employment_start_date" class="form-label">Employment Start Date</label>
+                                        <input asp-for="employment_start_date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employer_id" class="form-label">Employeer</label>
+                                        <input asp-for="employer_id" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="bank_name" class="form-label">Bank Name</label>
+                                        <input asp-for="bank_name" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="bank_no" class="form-label">Bank No</label>
+                                        <input asp-for="bank_no" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="epf_no" class="form-label">EPF No</label>
+                                        <input asp-for="epf_no" class="form-control" disabled />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="itax_no" class="form-label">Income Tax No</label>
+                                        <input asp-for="itax_no" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="sosco_no" class="form-label">Sosco No</label>
+                                        <input asp-for="sosco_no" class="form-control" disabled />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

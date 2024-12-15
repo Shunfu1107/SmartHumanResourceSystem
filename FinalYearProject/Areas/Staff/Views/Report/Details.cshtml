@@ -1,0 +1,163 @@
+﻿@model FinalYearProject.Models.ViewModels.ReportFeedbackVM
+
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2">
+        <div class="text-end">
+            <a class="btn btn-outline-info" href="#feedback">Feedback</a>
+            @if (Model.Report.report_receiver.Split(',').Contains(Model.CurrentUserId))
+            {
+                if (Model.Report.report_status != "Approved")
+                {
+                    <a class="btn btn-outline-primary" asp-action="Update" asp-route-id="@Model.Report.report_id">Mark As Done</a>
+                }
+            } else
+            {
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.Report.report_id">Edit</a>
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model?.Report.report_id">Delete</a>
+            }
+            <a class="btn btn-outline-secondary" asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</div>
+
+<!-- Report content -->
+<section class="pb-5">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    @if (@Model?.Report.report_status == "Deleted")
+                    {
+                        <div class="card-header bg-danger bg-opacity-10 border-danger border-opacity-25">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-exclamation-triangle text-danger fs-4 me-3"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <h5 class="mb-0 text-danger">This Report Has Been Deleted By The Owner</h5>
+                                    <p class="mb-0 text-muted small">Please dont perform any action on this report.</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">@Html.DisplayFor(model => model.Report.report_title)</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-lg-12">
+                            <p class="text-sm text-end ">@Html.DisplayFor(model => model.Report.report_sender)</p>
+                            <p class="text-sm text-end ">@Html.DisplayFor(model => model.Report.report_date)</p>
+                        </div>
+                        <p class="text-sm">@Html.Raw(Model.Report.report_content)</p>
+                        <div class="border-bottom my-3 border-gray-200"></div>
+                        <!-- Existing report details code -->
+                        @if (Model.Report.Attachments != null)
+                        {
+                            <div class="card-header border-bottom">
+                                <h5 class="mb-0">Attachments</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>File Name</th>
+                                                <th>Upload Date</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (var attachment in Model.Report.Attachments)
+                                            {
+                                                <tr>
+                                                    <td>@attachment.file_name</td>
+                                                    <td>@attachment.upload_date.ToString("MM/dd/yyyy HH:mm")</td>
+                                                    <td>
+                                                        <a href="@Url.Action("DownloadAttachment", "Report", new { id = attachment.attachment_id })"
+                                                           class="btn btn-sm btn-primary">
+                                                            <i class="fas fa-download"></i> Download
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <p>No attachment available.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h2 id="feedback" class="h4 mb-0">
+                            <a class="card-collapse-link text-dark d-block " data-bs-toggle="collapse" href="#feeds-box" aria-expanded="true">
+                                Feedbacks
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="collapse show" id="feeds-box" role="tabpanel">
+                            <!-- Item-->
+                            <!-- Show Feedback Form if Current User is Report Receiver -->
+                            @if (Model.Report.report_receiver.Split(',').Contains(Model.CurrentUserId))
+                            {
+                                <form asp-action="Create" asp-controller="ReportFeedback" asp-area="Staff" method="post">
+                                    <div class="mb-3">
+                                        <label class="form-label">Add Feedback</label>
+                                        <textarea class="form-control" id="feedback_content" name="feedback_content" rows="4" placeholder="Write your feedback here..."></textarea>
+                                    </div>
+                                    <input type="hidden" name="report_id" value="@Model.Report.report_id" />
+                                    <div class="text-end">
+                                        <button type="submit" class="btn btn-primary">Submit Feedback</button>
+                                    </div>
+                                </form>
+                            }
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            @if (Model.Feedbacks != null && Model.Feedbacks.Count > 0)
+                            {
+                                @foreach (var feedback in Model.Feedbacks)
+                                {
+                                    <div class="p-3 border-bottom border-gray-200">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <div class="ms-3">
+                                                    <h5 class="fw-normal">@feedback.employee_id</h5>
+                                                    <p class="mb-0 text-xs text-gray-600 lh-1">@feedback.feedback_content</p>
+                                                </div>
+                                            </div>
+                                            <div class="text-end"><small class="text-gray-500">@feedback.feedback_date.ToString("g")</small></div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <p>No feedback available.</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</section>

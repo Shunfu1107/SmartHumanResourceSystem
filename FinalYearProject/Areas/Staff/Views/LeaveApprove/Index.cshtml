@@ -1,0 +1,93 @@
+﻿@model IEnumerable<FinalYearProject.Models.Leave>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Approve Leave Table -->
+<section class="tables py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h3 class="h4 mb-0">Approve Leave</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table text-sm mb-0 table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.EmployeeDetails)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.date_created)
+                                        </th>
+                                        <th>
+                                            Leave Period
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.leave_reason)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.approval_status)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.response_message)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.doc_filepath)
+                                        </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.staff_id)
+                                            </td>
+                                            <td>
+                                                @item.date_created.ToString("dd-mm-yyyy")
+                                            </td>
+                                            <td>
+                                                @item.leave_start.ToString("dd-mm-yyyy") - @item.leave_end.ToString("dd-mm-yyyy")
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.leave_reason)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.approval_status) -
+                                                @Html.DisplayFor(modelItem => item.approved_by)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.response_message)
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Content(item.doc_filepath)" target="_blank" class="btn btn-link">
+                                                    <i class="fas fa-file-alt"></i> View File
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary" asp-action="Decide" asp-route-id="@item.leave_id">Decide</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

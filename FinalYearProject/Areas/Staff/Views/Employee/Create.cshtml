@@ -1,0 +1,249 @@
+﻿@model EmployeeDetails
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Employee content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Edit Employee</h3>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" asp-action="Create" enctype="multipart/form-data">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <input type="hidden" asp-for="paidLeaveOnBargain" />
+                            <input type="hidden" asp-for="sickLeaveOnBargain" />
+                            <input type="hidden" asp-for="paidLeaveHourLeft" />
+                            <input type="hidden" asp-for="sickLeaveHourLeft" />
+                            <input type="hidden" asp-for="wages_rate" value="0" />
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="text-center p-3 mb-5 bg-white rounded">
+                                        <div class="mb-3">
+                                            <label asp-for="profileImg_path" class="form-label">Profile Image</label>
+                                            <input type="file" name="profPic" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee_id" class="col-form-label"></label>
+                                        <input asp-for="employee_id" class="form-control" readonly />
+                                        <span asp-validation-for="employee_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee_name" class="form-label">Employee Name</label>
+                                        <input asp-for="employee_name" class="form-control" />
+                                        <span asp-validation-for="employee_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="dob" class="form-label">Date Of Birth</label>
+                                        <input asp-for="dob" class="form-control" type="date" />
+                                        <span asp-validation-for="dob" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="email" class="form-label">Email</label>
+                                        <input asp-for="email" class="form-control" />
+                                        <span asp-validation-for="email" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="gender" class="form-label">Gender</label>
+                                        <select asp-for="gender" class="form-select mb-3" asp-items="ViewBag.gender"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="nationality" class="form-label">Nationality</label>
+                                        <select asp-for="nationality" class="form-select mb-3" asp-items="ViewBag.nationality"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="phone_no" class="form-label">Phone No</label>
+                                        <input asp-for="phone_no" class="form-control" />
+                                        <span asp-validation-for="phone_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="religion" class="form-label">Religion</label>
+                                        <select id="ddlReligion" asp-for="religion" class="form-select mb-3" asp-items="ViewBag.religion"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="parent_company" class="form-label"></label>
+                                        <select id="ddlCompany" asp-for="parent_company" class="form-select mb-3" asp-items="ViewBag.parent_company"></select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employee_id_by_company" class="col-form-label"></label>
+                                        <input asp-for="employee_id_by_company" class="form-control" id="companyEmployeeId" readonly />
+                                        <span asp-validation-for="employee_id_by_company" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employment_start_date" class="form-label">Employment Start Date</label>
+                                        <input asp-for="employment_start_date" class="form-control" value="@DateTime.Today.ToString("yyyy-MM-dd")" type="date" />
+                                        <span asp-validation-for="employment_start_date" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="staff_role" class="form-label">Role</label>
+                                        <select asp-for="staff_role" class="form-select mb-3" asp-items="ViewBag.staff_role"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="employer_id" class="form-label">Employeer</label>
+                                        <select id="ddlEmployer" asp-for="employer_id" class="form-select mb-3" asp-items="ViewBag.employer_id"></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="bank_name" class="form-label">Bank Name</label>
+                                        <input asp-for="bank_name" class="form-control" />
+                                        <span asp-validation-for="bank_name" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="bank_no" class="form-label">Bank No</label>
+                                        <input asp-for="bank_no" class="form-control" />
+                                        <span asp-validation-for="bank_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="epf_no" class="form-label">EPF No</label>
+                                        <input asp-for="epf_no" class="form-control" />
+                                        <span asp-validation-for="epf_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="itax_no" class="form-label">Income Tax No</label>
+                                        <input asp-for="itax_no" class="form-control" />
+                                        <span asp-validation-for="itax_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="sosco_no" class="form-label">Sosco No</label>
+                                        <input asp-for="sosco_no" class="form-control" />
+                                        <span asp-validation-for="sosco_no" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="user_id" class="form-label">User Id</label>
+                                        <input asp-for="user_id" class="form-control" />
+                                        <span asp-validation-for="user_id" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label asp-for="acc_pass" class="form-label"></label>
+                                        <input asp-for="acc_pass" class="form-control" type="password" />
+                                        <span asp-validation-for="acc_pass" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-bottom my-3 border-gray-200"></div>
+                            <div class="row">
+                                <div class="text-end">
+                                    <partial name="_CreateBackPartial"></partial>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(document).ready(function () {
+            getEmployer();
+            getCompanyEmployeeID();
+            $('#ddlCompany').change(function () {
+                getEmployer();
+                getCompanyEmployeeID();
+            });
+        });
+
+        function getEmployer() {
+            console.log("Function Triggered");
+            var url = '@Url.Content("~/")' + "Staff/Employee/GetEmployer";
+            var ddlsource = '#ddlCompany';
+            $.getJSON(url, {id: $(ddlsource).val()}, function (data){
+                var items = '';
+                $('#ddlEmployer').empty();
+                $.each(data, function (i, employer) {
+                    items += "<option value='" + employer.value + "'>" + employer.text + "</option>";
+                });
+
+                $('#ddlEmployer').html(items);
+            });
+        }
+
+        function getCompanyEmployeeID() {
+            console.log("Function Triggered");
+            var url = '@Url.Content("~/")' + "Staff/Employee/GenerateCompanyEmployeeID"
+            var ddlsource = '#ddlCompany';
+            $.getJSON(url, { companyID: $(ddlsource).val() }, function (data) {
+                console.log(data);
+                document.getElementById("companyEmployeeId").value = data;
+            });
+        }
+    </script>
+}

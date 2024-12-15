@@ -1,0 +1,87 @@
+﻿@model FinalYearProject.Models.CompanyKPI
+
+@{
+    ViewData["Title"] = "Company KPI Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Action Buttons -->
+<div class="py-3">
+    <div class="container-fluid py-2">
+        <div class="text-end">
+            <partial name="_EditDeleteBackButtonPartial" model="@Model.KPI_id"></partial>
+        </div>
+    </div>
+</div>
+
+<!-- Company KPI content -->
+<section class="pb-5 py-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h3 class="h4 mb-0">Company KPI Details</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="target_KPI" class="form-label">Target KPI</label>
+                                    <input asp-for="target_KPI" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="company_id" class="form-label">Company Id</label>
+                                    <input asp-for="company_id" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label asp-for="target_name" class="form-label">Target Name</label>
+                                    <input asp-for="target_name" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="hit_KPI_allowance" class="form-label">Hit KPI Allowance</label>
+                                    <input asp-for="hit_KPI_allowance" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="start_date" class="form-label">Start Date</label>
+                                    <input asp-for="start_date" class="form-control" disabled />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="end_date" class="form-label">End Date</label>
+                                    <input asp-for="end_date" class="form-control" disabled />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label asp-for="status" class="control-label">Status</label>
+                                    <input asp-for="status" class="form-control" disabled>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

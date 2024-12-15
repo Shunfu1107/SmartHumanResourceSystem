@@ -1,0 +1,193 @@
+﻿@model FinalYearProject.Models.ViewModels.DashboardVM
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!-- Breadcrumb-->
+@await Html.PartialAsync("_Breadcrumb")
+
+<!-- Cards -->
+<div class="container-fluid py-4">
+    <div class="row g-3 mb-4 py-1 align-items-stretch">
+        <!-- Total Employee Card -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-user-tie text-primary fs-4 me-2"></i>
+                        <h6 class="mb-0">Total Employees</h6>
+                    </div>
+                    <h3 class="mb-1"> @Model.TotalEmployees </h3>
+                </div>
+            </div>
+        </div>
+        <!-- Today Leaves Card -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-umbrella-beach text-danger fs-4 me-2"></i>
+                        <h6 class="mb-0">Total Employee Leaves Today</h6>
+                    </div>
+                    <h3 class="mb-1"> @Model.TodayLeaves </h3>
+                </div>
+            </div>
+        </div>
+        <!-- Today Notification Card -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-bullhorn text-info fs-4 me-2"></i>
+                        <h6 class="mb-0">Total Notifications Today</h6>
+                    </div>
+                    <h3 class="mb-1"> @Model.TodayNotifications </h3>
+                </div>
+            </div>
+        </div>
+        <!-- Today Date Card -->
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="fas fa-calendar text-primary fs-4 me-2"></i>
+                        <h6 class="mb-0">Today's' Date</h6>
+                    </div>
+                    <h3 class="mb-1"> @Model.TodayDate.ToString("dd-MM-yyyy") </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="row g-3 mb-4 py-1">
+        <!-- Your upcoming leave card -->
+        @if (User.IsInRole("EmployeeView"))
+        {
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h2 class="h5 fw-normal mb-0">
+                            <a class="card-collapse-link text-dark d-block" data-bs-toggle="collapse" href="#your-leaves" aria-expanded="true">
+                                <b>Your Upcoming Leave</b>
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="card-body-0">
+                        <div class="collapse show" id="your-leaves" role="tabpanel">
+                            <!-- Your upcoming leave items -->
+                            @if (Model.UpcomingLeaves.Count > 0)
+                            {
+                                @foreach (var leave in Model.UpcomingLeaves)
+                                {
+                                    <div class="p-3 border-bottom border-gray-200">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
+                                                <div class="ms-3">
+                                                    <h5 class="fw-normal">@leave.leave_start.ToShortDateString() - @leave.leave_end.ToShortDateString()</h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                <div class="p-3 border-bottom border-gray-200">
+                                    <div class="ms-3 text-center">
+                                        <h5 class="fw-normal"><a asp-action="Index" asp-controller="LeaveApply" asp-area="Staff">View All</a></h5>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="ms-3 text-center py-5">
+                                    <h5 class="text-gray-600 fw-light">No Upcoming Leaves</h5>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- Employee leaves today items -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <h2 class="h5 fw-normal mb-0">
+                        <a class="card-collapse-link text-dark d-block" data-bs-toggle="collapse" href="#employee-leaves" aria-expanded="true">
+                            <b>Employees Leave Todays</b>
+                        </a>
+                    </h2>
+                </div>
+                <div class="card-body-0">
+                    <div class="collapse show" id="employee-leaves" role="tabpanel">
+                        <!-- Employee leaves today items -->
+                        @if (Model.TodayLeavesList.Count > 0)
+                        {
+                            @foreach (var leave in Model.TodayLeavesList)
+                            {
+                                <div class="p-3 border-bottom border-gray-200">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex">
+                                            <div class="ms-3">
+                                                <h5 class="fw-normal">@leave.staff_id</h5>
+                                                <small class="text-gray-600 fw-light">@leave.leave_start.ToShortDateString() - @leave.leave_end.ToShortDateString()</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        } else
+                        {
+                            <div class="ms-3 text-center py-5">
+                                <h5 class="text-gray-600 fw-light">No Employee are on Leaves Today</h5>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Today notification card -->
+        <div class="col-lg-4 col-md-6">
+            <div class="card">
+                <div class="card-header border-bottom">
+                    <h2 class="h5 fw-normal mb-0">
+                        <a class="card-collapse-link text-dark d-block" data-bs-toggle="collapse" href="#notification-today" aria-expanded="true">
+                            <b>Notification Today</b>
+                        </a>
+                    </h2>
+                </div>
+                <div class="card-body-0">
+                    <div class="collapse show" id="notification-today" role="tabpanel">
+                        <!-- Today notification Items -->
+                        @if (Model.TodayNotificationsList.Count > 0)
+                        {
+                            @foreach (var notification in Model.TodayNotificationsList)
+                            {
+                                <div class="p-3 border-bottom border-gray-200">
+                                    <div class="d-flex justify-content-between">
+                                        <div class="d-flex">
+                                            <div class="ms-3">
+                                                <h5 class="fw-normal">@notification.notification_title</h5>
+                                                <small class="text-gray-600 fw-light">@notification.notification_date.ToShortTimeString()</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="p-3 border-bottom border-gray-200">
+                                <div class="ms-3 text-center">
+                                    <h5 class="fw-normal"><a asp-action="Index" asp-controller="Notification" asp-area="Staff">View All</a></h5>
+                                </div>
+                            </div>
+                        } else
+                        {
+                            <div class="ms-3 text-center py-5">
+                                <h5 class="text-gray-600 fw-light">No notification today</h5>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
